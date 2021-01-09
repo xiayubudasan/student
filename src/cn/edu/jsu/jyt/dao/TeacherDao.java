@@ -109,7 +109,7 @@ public class TeacherDao {
     		//PreparedStatement可以有效防止sql注入
     	 String ss="select  * from teacher where tno="+t.getTno();
     	 Vector v=getSelectAll(ss);
-    	 if(v.isEmpty())
+    	 if(!v.isEmpty())
     		  return -1;//如果tno存在则可以进行修改
     	 else{
     		

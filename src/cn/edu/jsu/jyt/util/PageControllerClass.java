@@ -47,7 +47,8 @@ public class PageControllerClass {
 		}
 		public Vector<Vector> getPaegData() {// 根据当前页数，筛选记录
 			recordCount = bigList.size();//定义记录数为数据库中表的所有数据
-			for (int i = (curentPageIndex - 1) * countPerpage; i < curentPageIndex * countPerpage && i < recordCount; i++) {//取得当前页数的记录，curentPageIndex当前页数，countPerpage每页显示的记录数
+			for (int i = (curentPageIndex - 1) * countPerpage; i < curentPageIndex * countPerpage && i < recordCount; i++) 
+			{//取得当前页数的记录，curentPageIndex当前页数，countPerpage每页显示的记录数
 				smallList.add(bigList.get(i));//将记录加入到小集合中
 			}
 			return smallList;//返回小集合（当前页的数据）

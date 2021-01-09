@@ -106,7 +106,7 @@ public class TeacherDataOperator {
 		    	DataBaseConnection02 dbcs=new DataBaseConnection02();
 		    	String sql="insert into teacher(tno,tname,tsex,tage,tpt,password) values(?,?,?,?,?,?)";
 		        try(Connection conn=dbcs.getConnection();
-		        		PreparedStatement pstmt=conn.prepareStatement(sql);)
+		        	PreparedStatement pstmt=conn.prepareStatement(sql);)
 		        {
 		        	
 		        	for(int i=1;i<=10000;i++)

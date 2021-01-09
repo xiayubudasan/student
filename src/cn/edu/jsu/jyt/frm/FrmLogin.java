@@ -138,7 +138,7 @@ public class FrmLogin extends JFrame {
 					}
 					else if(manbtn.isSelected())
 					{
-						JFrame mm=FrmLogin.getIns();
+						JFrame mm=FrmManLogin.getIns();
 						FrmManLogin m=(FrmManLogin) mm;
 								m.setVisible(true);
 					}

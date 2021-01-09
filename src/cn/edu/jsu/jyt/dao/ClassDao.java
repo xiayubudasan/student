@@ -8,12 +8,16 @@ import java.util.Vector;
 
 import cn.edu.jsu.jyt.dbc.DataBaseConnection02;
 import cn.edu.jsu.jyt.vo.CClass;
-
+/**
+ * 对class表的操作
+ * @author J jyt
+ *
+ */
 public class ClassDao {
 	/**
 	 * class表更新
-	 * @param c
-	 * @param s
+	 * @param c CClass
+	 * @param s String
 	 */
 	public static void updateClass(CClass c,String s)
 	{

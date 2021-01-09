@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.junit.Test;
+
 public class DataBaseConnection02 {
   private static final String DBRIVER="com.mysql.cj.jdbc.Driver"; //定义MySQL数据库驱动程序
   private static final String DBURL="jdbc:mysql://localhost:3306/information_management?serverTimezone=GMT%2B8"; //定义MySQL数据库连接地址
@@ -19,6 +21,7 @@ public class DataBaseConnection02 {
   public Connection getConnection() {//返回数据库连接对象
     return this.conn;
   }
+@Test
   public void close() {//关闭数据连接
     if(this.conn!=null) {
       try {this.conn.close();} catch (SQLException e) {e.printStackTrace();}

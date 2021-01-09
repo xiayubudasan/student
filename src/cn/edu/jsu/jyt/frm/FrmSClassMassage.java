@@ -204,10 +204,9 @@ public class FrmSClassMassage extends JFrame {
 		JButton add = new JButton("增加");
 		add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(table.getSelectedRow()!=0)
+				if(table.getSelectedRow()!=-1)
 				{
-					while(table.getSelectedRow()!=-1)
-					{
+				
 					Score s=new Score(FrmStuLogin.getVector().elementAt(0).toString(),table.getValueAt(table.getSelectedRow(), 0).toString());
 					if(ScoreDao.insertScore(s)!=0)
 					{
@@ -222,7 +221,7 @@ public class FrmSClassMassage extends JFrame {
 					{
 						JOptionPane.showMessageDialog(null, "添加课程失败");
 					}
-					}
+					
 				}
 				else
 				{
@@ -243,8 +242,8 @@ public class FrmSClassMassage extends JFrame {
 					{
 						while(table2.getSelectedRow()!=-1)
 						{
-							String sql="delete from class where cno="+table2.getValueAt(table2.getSelectedRow(), 0);
-							ClassDao.deleteClass(sql);
+							String sql="delete from score where cno="+table2.getValueAt(table2.getSelectedRow(), 0);
+							ScoreDao.deleteScore(sql);
 							model2.removeRow(table2.getSelectedRow());
 						}
 					}
@@ -284,8 +283,9 @@ public class FrmSClassMassage extends JFrame {
 					sorter = new TableRowSorter<DefaultTableModel>(model);//设置表格模型排序器
 					table.setModel(model);
 					table.setRowSorter(sorter);//设置表格排序器
-					Vector<Vector> vv=ClassDao.getSelectAll("select * from class where cno not in(select cno from score where sno="+FrmStuLogin.getVector().elementAt(0).toString()+")");
-			       sorter2=new TableRowSorter<DefaultTableModel>(model2);
+					Vector<Vector> vv=ClassDao.getSelectAll("select * from class where cno  in(select cno from score where sno="+FrmStuLogin.getVector().elementAt(0).toString()+")");
+			       model2=new DefaultTableModel(vv,titles);
+					sorter2=new TableRowSorter<DefaultTableModel>(model2);
 			       table2.setModel(model2);
 					table2.setRowSorter(sorter2);//设置表格排序器
 			}

@@ -31,7 +31,7 @@ public class ManageIO implements Serializable
     	        oos=new ObjectOutputStream(out);
     	        for(Object obj:list.toArray())
     	        oos.writeObject(obj);
-    	        oos.close();
+    	        oos.close(); 
     	    }
     	
     	public ArrayList<Management> showAll() throws Exception 

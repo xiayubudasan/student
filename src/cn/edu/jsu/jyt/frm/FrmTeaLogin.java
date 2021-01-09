@@ -24,7 +24,7 @@ public class FrmTeaLogin extends JFrame {
 	 private static JFrame frame;
 		public static JFrame getIns() {//µ¥Àý
 			if(frame==null) {
-				frame=new FrmStuLogin();
+				frame=new FrmTeaLogin();
 			}
 			return frame;
 		}

@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
+import cn.edu.jsu.jyt.dao.ClassDao;
 import cn.edu.jsu.jyt.dao.ScoreDao;
 import cn.edu.jsu.jyt.dao.StudentDao;
 import cn.edu.jsu.jyt.dao.TeacherDao;
@@ -176,6 +177,8 @@ public class FrmTScoreMassage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			model=new DefaultTableModel(new PageControllerSC2().prePage(),titles);
 			table.setModel(model);
+			sorter = new TableRowSorter<DefaultTableModel>(model);//设置表格模型排序器
+			table.setRowSorter(sorter);//设置表格排序器
 			}
 		});
 		pre.setBounds(35, 215, 111, 29);
@@ -186,6 +189,8 @@ public class FrmTScoreMassage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				model=new DefaultTableModel(new PageControllerSC2().nextPage(),titles);
 				table.setModel(model);
+				sorter = new TableRowSorter<DefaultTableModel>(model);//设置表格模型排序器
+				table.setRowSorter(sorter);//设置表格排序器
 			}
 		});
 		next.setBounds(238, 215, 111, 29);
@@ -207,6 +212,8 @@ public class FrmTScoreMassage extends JFrame {
 			   pcl.setCountPerpage(pageSize);
 			   model=new DefaultTableModel(pcl.getPaegData(),titles);
 			   table.setModel(model);  
+				sorter = new TableRowSorter<DefaultTableModel>(model);//设置表格模型排序器
+				table.setRowSorter(sorter);//设置表格排序器
 			}
 		});
 		comboBox.setSelectedIndex(1);//设置下拉框默认值
@@ -237,12 +244,13 @@ public class FrmTScoreMassage extends JFrame {
 						Vector v=ScoreDao.getSelectAll(sql);
 						if(!v.isEmpty())//如果学号，课程号存在，则可以删除
 						{
-							String s="delect from score where sno="+t1.getText().trim()+" and cno="+t2.getText().trim();
+							String s="delete from score where sno="+t1.getText().trim()+" and cno="+t2.getText().trim();
 						    ScoreDao.deleteScore(s);
-							   Vector<Vector> vv=ScoreDao.getSelectAll("select * from class");
+							   Vector<Vector> vv=ScoreDao.getSelectAll("select * from score");
 								p.setList(vv);
 								Vector<Vector> stuInfo=p.getPaegData();
 								model=new DefaultTableModel(stuInfo,titles);
+								table.setModel(model);
 								sorter = new TableRowSorter<DefaultTableModel>(model);//设置表格模型排序器
 								table.setRowSorter(sorter);//设置表格排序器	
 								table.setModel(model);
@@ -277,7 +285,7 @@ public class FrmTScoreMassage extends JFrame {
 						else if(ScoreDao.updateScore(c)!=0)
 						{
 							JOptionPane.showMessageDialog(null, "更新成功");
-							Vector<Vector> v=ScoreDao.getSelectAll("select * from student");
+							Vector<Vector> v=ScoreDao.getSelectAll("select * from score");
 							p.setList(v);
 							Vector<Vector> stuInfo=p.getPaegData();
 							model=new DefaultTableModel(stuInfo,titles);
@@ -313,13 +321,15 @@ public class FrmTScoreMassage extends JFrame {
 						else if(ScoreDao.insertScore(c)!=0)
 						{
 							JOptionPane.showMessageDialog(null, "插入成功");
-							Vector v=new Vector();
-							Collections.addAll(v, c.getSno(),c.getCno(),c.getCj());
-							stuInfo.add(v);
-							model.setDataVector(stuInfo, titles);
-							table.setModel(model);
-							 sorter=new TableRowSorter<DefaultTableModel>(model);
-					    	 table.setRowSorter(sorter);
+						
+							    Vector<Vector> v=ScoreDao.getSelectAll("select * from score");
+								p.setList(v);
+								Vector<Vector> stuInfo=p.getPaegData();
+								model=new DefaultTableModel(stuInfo,titles);
+			
+								sorter = new TableRowSorter<DefaultTableModel>(model);//设置表格模型排序器
+								table.setRowSorter(sorter);//设置表格排序器
+								table.setModel(model);
 						}
 						else
 						{
@@ -371,6 +381,7 @@ public class FrmTScoreMassage extends JFrame {
 				{
 				String sql="select * from score where sno="+t1.getText().trim()+" and cno="+t2.getText().trim();
 				Vector<Vector> v=ScoreDao.getSelectAll(sql);
+			
 				if(!v.isEmpty())
 				{
 					    p.setList(v);
@@ -382,7 +393,7 @@ public class FrmTScoreMassage extends JFrame {
 				}
 				else
 				{
-					JOptionPane.showMessageDialog(null, "未查询到学号，请先添加");
+					JOptionPane.showMessageDialog(null, "未查询到该课程成绩，请先添加");
 				}
 				}
 				else

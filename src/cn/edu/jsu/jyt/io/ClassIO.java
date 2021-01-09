@@ -17,7 +17,11 @@ import java.util.Vector;
 
 import cn.edu.jsu.jyt.vo.CClass;
 import cn.edu.jsu.jyt.vo.Management;
-
+/**
+ * 
+ * @author J
+ *
+ */
 public class ClassIO {
 	
 	private File file;

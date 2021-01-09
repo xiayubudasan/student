@@ -194,7 +194,8 @@ public class FrmMTeaMassage extends JFrame {
 					{
 						while(table.getSelectedRow()!=-1)
 						{
-							String sql="delete from tno where tno="+table.getValueAt(table.getSelectedRow(), 0).toString();
+							JOptionPane.showMessageDialog(null, "删除成功");
+							String sql="delete from teacher where tno="+table.getValueAt(table.getSelectedRow(), 0).toString();
 							TeacherDao.deleteTeacher(sql);
 							model.removeRow(table.getSelectedRow());
 						}
@@ -208,9 +209,10 @@ public class FrmMTeaMassage extends JFrame {
 						Vector v=TeacherDao.getSelectAll(sql);
 						if(!v.isEmpty())//如果工号存在，则可以删除
 						{
+							JOptionPane.showMessageDialog(null,"删除成功");
 							String s="delete from teacher where tno="+t1.getText().trim();
 						    TeacherDao.deleteTeacher(s);
-						    Vector<Vector> vv=TeacherDao.getSelectAll("select * from class");
+						    Vector<Vector> vv=TeacherDao.getSelectAll("select * from teacher");
 							p.setList(vv);
 							Vector<Vector> stuInfo=p.getPaegData();
 							model=new DefaultTableModel(stuInfo,titles);

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import org.junit.Test;
+
 import cn.edu.jsu.jyt.dbc.DataBaseConnection;
 import cn.edu.jsu.jyt.dbc.DataBaseConnection02;
 
@@ -70,7 +72,7 @@ public class StudentDataOperater {
 	    }
 	    /**
 	     * 随机返回学号
-	     * @return
+	     * @return StringBuider 学号
 	     */
 	    public static StringBuilder getStuno() {//不使用String，因为需要大量拼接字符串
 	    	StringBuilder xh=new StringBuilder("2019401");//学号前7位相同
@@ -121,6 +123,7 @@ public class StudentDataOperater {
 	    	      addStudent();
 
 		}
+
 	        	public static void addStudent() {//增加成绩
 	        	DataBaseConnection02 dbcs=new DataBaseConnection02();
 	        	String sql="insert into student(sno,sname,ssex,sage,birthday,password,sdept,major) values(?,?,?,?,?,?,?,?)";//使用占位符定义插入语句

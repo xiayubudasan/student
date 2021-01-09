@@ -30,7 +30,7 @@ public class FrmManLogin extends JFrame {
 	private static JFrame frame;
 	public static  JFrame getIns() {//单例
 		if(frame==null) {
-			frame=new FrmLogin();
+			frame=new FrmManLogin();
 		}
 		return frame;
 	}
@@ -108,6 +108,12 @@ public class FrmManLogin extends JFrame {
 		toolBar.add(Sbtn);
 		
 		JButton Tbtn = new JButton("教师信息修改");
+		Tbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				FrmMTeaMassage mts=new FrmMTeaMassage();
+				mts.setVisible(true);
+			}
+		});
 		toolBar.add(Tbtn);
 		
 		JButton Cbtn = new JButton("课程信息修改");
@@ -123,6 +129,7 @@ public class FrmManLogin extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Excel excle=new Excel();
+				excle.toWriteExcle();
 				JOptionPane.showMessageDialog(null, "导出成功");
 			}
 		});

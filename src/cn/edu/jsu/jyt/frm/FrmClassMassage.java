@@ -159,8 +159,10 @@ public class FrmClassMassage extends JFrame {
 		JButton pre = new JButton("上一页");
 		pre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 model=new DefaultTableModel(new PageControllerSC().prePage(),titles);//设置数据模型中的数据为上一页内容
+				 model=new DefaultTableModel(new PageControllerClass().prePage(),titles);//设置数据模型中的数据为上一页内容
 				table.setModel(model);//设置表格的数据模型
+			 	sorter = new TableRowSorter<DefaultTableModel>(model);//设置表格模型排序器
+				table.setRowSorter(sorter);//设置表格排序器	
 			}
 		});
 		pre.setBounds(35, 342, 123, 29);
@@ -169,8 +171,10 @@ public class FrmClassMassage extends JFrame {
 		JButton next = new JButton("下一页");
 		next.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 model=new DefaultTableModel(new PageControllerSC().nextPage(),titles);//设置数据模型中的数据为下一页内容
+				 model=new DefaultTableModel(new PageControllerClass().nextPage(),titles);//设置数据模型中的数据为下一页内容
 				table.setModel(model);//设置表格的数据模型
+			 	sorter = new TableRowSorter<DefaultTableModel>(model);//设置表格模型排序器
+				table.setRowSorter(sorter);//设置表格排序器	
 			}
 		});
 		next.setBounds(219, 342, 123, 29);
@@ -188,6 +192,8 @@ public class FrmClassMassage extends JFrame {
 				pcl.setCountPerpage(pageSize);//设置每页显示记录条数
 				model=new DefaultTableModel(pcl.getPaegData(),titles);//设置数据模型
 				table.setModel(model);//设置表格数据模型
+			 	sorter = new TableRowSorter<DefaultTableModel>(model);//设置表格模型排序器
+				table.setRowSorter(sorter);//设置表格排序器	
 			}
 		});
 		comboBox.setSelectedIndex(1);//设置下拉框默认值
@@ -213,6 +219,9 @@ public class FrmClassMassage extends JFrame {
 					}
 					else
 					{
+						if(JOptionPane.showConfirmDialog(null,"确定要删除数据吗？","",JOptionPane.YES_NO_CANCEL_OPTION)==0)
+						{
+							
 						if(t1.getText().trim().length()!=0)//输入课程号不为0
 						{
 							String sql="select * from class where cno="+t1.getText().trim();
@@ -234,6 +243,7 @@ public class FrmClassMassage extends JFrame {
 							{
 								JOptionPane.showMessageDialog(null, "当前课程信息不存在，请先加入");
 							}
+						}
 						}
 						else
 						{

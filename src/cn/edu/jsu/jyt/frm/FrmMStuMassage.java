@@ -215,9 +215,9 @@ public class FrmMStuMassage extends JFrame {
 						Vector v=StudentDao.getSelectAll(sql);
 						if(!v.isEmpty())//如果学号存在，则可以删除
 						{
-							String s="delect from student where sno="+t1.getText().trim();
+							String s="delete from student where sno="+t1.getText().trim();
 						   StudentDao.deleteStudent(s);
-						   Vector<Vector> vv=TeacherDao.getSelectAll("select * from class");
+						   Vector<Vector> vv=StudentDao.getSelectAll("select * from student");
 							p.setList(vv);
 							Vector<Vector> stuInfo=p.getPaegData();
 							model=new DefaultTableModel(stuInfo,titles);
@@ -400,10 +400,9 @@ public class FrmMStuMassage extends JFrame {
 				{
 				String sql="select * from student where sno="+t1.getText().trim();
 				Vector<Vector> v=StudentDao.getSelectAll(sql);
-				System.out.println(v);
 				if(!v.isEmpty())
 				{
-					 p.setList(v);
+					    p.setList(v);
 				 		Vector<Vector> stuInfo=p.getPaegData();
 				 		model=new DefaultTableModel(stuInfo,titles);	
 				    	 table.setModel(model);
