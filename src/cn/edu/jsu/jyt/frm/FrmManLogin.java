@@ -25,6 +25,7 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
 import cn.edu.jsu.jyt.util.Excel;
+import cn.edu.jsu.jyt.util.ExcelPrint;
 
 public class FrmManLogin extends JFrame {
 	private static JFrame frame;
@@ -134,6 +135,15 @@ public class FrmManLogin extends JFrame {
 			}
 		});
 		toolBar.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("≥…º®µº»Î");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ExcelPrint ep=new ExcelPrint();
+				ep.main(null);
+			}
+		});
+		toolBar.add(btnNewButton_1);
 
 	}
 
